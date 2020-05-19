@@ -7,4 +7,8 @@ class Patient < ApplicationRecord
   has_many :diagnostic_procedures
   has_many :diagnoses
   has_many :treatments
+
+  def full_name
+    "#{self.first_name} #{self.middle_name} #{self.last_name}"
+  end
 end
