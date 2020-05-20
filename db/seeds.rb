@@ -17,28 +17,25 @@ require 'faker'
 
   Allergy.create(
     patient_id: Patient.last.id,
-    description: Faker::Lorem.sentence(word_count: 10)
+    description: Faker::Lorem.sentence(word_count: 10).downcase
   )
 
   Diagnosis.create(
+    admission_id: Admission.last.id,
+    patient_id: Patient.last.id,
     coding_system: Faker::Lorem.word,
     code: Faker::Number.hexadecimal(digits: 3),
-    description: Faker::Lorem.sentence(word_count: 10)
+    description: Faker::Lorem.sentence(word_count: 10).downcase
   )
 
   DiagnosticProcedure.create(
     patient_id: Patient.last.id,
-    description: Faker::Lorem.sentence(word_count: 10),
+    description: Faker::Lorem.sentence(word_count: 10).downcase,
     moment: Faker::Time.backward(days: 150)
   )
 
   Facility.create(
     name: Faker::Company.name
-  )
-
-  OrderFrequency.create(
-    value: rand(1..10),
-    frequency_unit: 0
   )
 
   MedicationOrder.create(
@@ -47,24 +44,31 @@ require 'faker'
     mass_unit: 0,
     dosage: Faker::Number.decimal(l_digits: 0, r_digits: 3),
     medication_route: Faker::Number.within(range: 0..2),
-    order_frequency_id: OrderFrequency.find(rand(1..OrderFrequency.count)),
-    necessity: Faker::Lorem.sentence(word_count: 10)
+    necessity: Faker::Lorem.sentence(word_count: 10).downcase
+  )
+
+  OrderFrequency.create(
+    value: rand(1..10),
+    frequency_unit: 0,
+    medication_order_id: rand(1..MedicationOrder.count)
   )
 
   Observation.create(
     admission_id: Admission.last.id,
-    description: Faker::Lorem.sentence(word_count: 10),
+    description: Faker::Lorem.sentence(word_count: 10).downcase,
     moment: Faker::Time.backward(days: 150)
   )
 
   Symptom.create(
     admission_id: Admission.last.id,
-    description: Faker::Lorem.sentence(word_count: 10)
+    description: Faker::Lorem.sentence(word_count: 10).downcase
   )
 
   Treatment.create(
     patient_id: Patient.last.id,
-    description: Faker::Lorem.sentence(word_count: 10),
-    necessity: Faker::Lorem.sentence(word_count: 10)
+    description: Faker::Lorem.sentence(word_count: 10).downcase,
+    necessity: Faker::Lorem.sentence(word_count: 10).downcase
   )
 end
+
+Facility.create(name: 'Saint Bernard')
