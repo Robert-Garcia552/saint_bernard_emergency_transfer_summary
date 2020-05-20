@@ -6,28 +6,48 @@ html, body {
   height: 100%;
 }
 
-table {
-  padding: 4em;
-  margin: auto;
+.container {
+  margin: 4em auto;
+  padding: 0 !important;
+  text-align: left;
   border: 1px solid black;
 
-  td, tr {
-    border: 1px solid black;
-  }
+  & > * {
+    padding: 10px;
+    border-bottom: 1px solid black;
 
-  .hide-border-btm {
-    border-bottom: none;
-
-    & > td {
+    &:last-child {
       border-bottom: none;
     }
   }
 
-  .hide-border-top {
-    border-top: none;
+  .small-width {
+    width: 140px;
+    border-right: 1px solid black;
+    border-bottom: none;
+  }
 
-    & > td {
-      border-top: none;
+  .border-top {
+    border-top: 1px solid black;
+  }
+
+  .flex {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+
+    & > * {
+      padding: 10px;
+      border-right: 1px solid black;
     }
   }
+}
+
+.header {
+  font-size: 1.4em;
+  margin: 0;
+}
+
+.gray-background {
+  background-color: #c9c5c5;
 }
