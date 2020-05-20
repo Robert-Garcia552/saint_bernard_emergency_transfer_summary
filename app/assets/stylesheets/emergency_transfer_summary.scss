@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 html, body {
-  height: 100%;
+  height: auto;
 }
 
 .container {
@@ -50,4 +50,19 @@ html, body {
 
 .gray-background {
   background-color: #c9c5c5;
+}
+
+#btn  {
+  display: block;
+  margin: auto;
+}
+
+@media print {
+  #btn {
+    display: none;
+  }
+
+  .container:last-child {
+    page-break-after: none;
+}
 }
