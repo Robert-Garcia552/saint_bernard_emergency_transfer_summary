@@ -1,0 +1,33 @@
+// Place all the styles related to the emergency_transfer_summary controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+html, body {
+  height: 100%;
+}
+
+table {
+  padding: 4em;
+  margin: auto;
+  border: 1px solid black;
+
+  td, tr {
+    border: 1px solid black;
+  }
+
+  .hide-border-btm {
+    border-bottom: none;
+
+    & > td {
+      border-bottom: none;
+    }
+  }
+
+  .hide-border-top {
+    border-top: none;
+
+    & > td {
+      border-top: none;
+    }
+  }
+}

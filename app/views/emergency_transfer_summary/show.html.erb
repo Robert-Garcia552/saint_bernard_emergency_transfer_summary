@@ -1,0 +1,49 @@
+<table>
+  <tr>
+    <th>Emergency Transfer Summary (Form 34L-D)</th>
+  </tr>
+  <tr>
+    <th>Transferring Facility</th>
+  </tr>
+  <tr class='hide-border-btm'>
+    <th>Name</th>
+  </tr>
+  <tr class='hide-border-top'>
+    <td>
+      <%= @facility.name %>
+    </td>
+  </tr>
+  <tr>
+    <th>Patient Information</th>
+  </tr>
+  <tr class='hide-border-btm'>
+    <th>First Name</th>
+    <th>Middle Name</th>
+    <th>Last Name</th>
+    <th>Medical Record (MR)</th>
+  </tr>
+  <tr class='hide-border-top'>
+    <td><%= @patient.first_name %></td>
+    <td><%= @patient.middle_name %></td>
+    <td><%= @patient.last_name %></td>
+    <td><%= @patient.mr %></td>
+  </tr>
+  <tr>
+    <th>Summary</th>
+  </tr>
+  <tr>
+    <td>
+      <p>
+        This <%= @patient.age %> years old <%= @patient.gender %> was admitted to <%= @facility.name %> <%= @admission_date %> due to <%= @diagnoses_sentence %>.
+        The observed symptoms on admission were <%= @symptoms_sentence %>. <%= @observations_sentence %>.
+      </p>
+      <p>
+        Upon asking about known allergies, the patient disclosed <%= @allergies_sentence %>. Upon asking about chronic conditions, the patient disclosed
+        <%= @chronic_conditions_sentence %>. The patient was administered with <%= @medications %>.
+      </p>
+      <p>
+        The staff performed <%= @diagnostic_procedures_sentence %>, revealing <%= @chronic_conditions_sentence %>. Our team proceeded to <%= @treatment_sentence %>.
+      </p>
+    </td>
+  </tr>
+</table>
