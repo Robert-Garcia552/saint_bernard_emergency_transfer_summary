@@ -8,15 +8,19 @@ class EmergencyTransferSummaryController < ApplicationController
     @facility = Facility.find_by(name: 'Saint Bernard')
     @patient = Patient.find(params[:id])
 
-    @allergies_sentence = allergies_sentence
-    @chronic_conditions_sentence = chronic_conditions_sentence
-    @medications = medications
-    @treatment_sentence = treatment_sentence
-    @diagnostic_procedures_sentence = diagnostic_procedures_sentence
-    @admission_date = admission_date
-    @symptoms_sentence = symptoms_sentence
-    @diagnoses_sentence = diagnoses_sentence
-    @observations_sentence = observations_sentence
+    @summary = {
+      "patient" => @patient,
+      "facility" => @facility,
+      "allergies_sentence" => allergies_sentence,
+      "chronic_conditions_sentence" => chronic_conditions_sentence,
+      "medications" => medications,
+      "treatment_sentence" => treatment_sentence,
+      "diagnostic_procedures_sentence" => diagnostic_procedures_sentence,
+      "admission_date" => admission_date,
+      "symptoms_sentence" => symptoms_sentence,
+      "diagnoses_sentence" => diagnoses_sentence,
+      "observations_sentence" => observations_sentence,
+    }
   end
 
   def allergies_sentence
@@ -61,7 +65,7 @@ class EmergencyTransferSummaryController < ApplicationController
   end
 
   def observations_sentence
-    observations_descriptions = @patient.admission.observations.map{ |observation| observation.description.tr('.', '') }
+    observations_descriptions = @patient.admission.observations.map{ |observation| observation.description.capitalize.tr('.', '') }
     observations_descriptions.join(', ')
   end
 
