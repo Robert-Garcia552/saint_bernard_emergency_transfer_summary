@@ -1,24 +1,54 @@
-# README
+# Saint Bernard Ski Resort Transfer Form App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Author
 
-Things you may want to cover:
+Robert Garcia
 
-* Ruby version
+### Purpose
 
-* System dependencies
+This web-app allowed me to practice handling associations with Ruby on Rails.
 
-* Configuration
+#### Background
 
-* Database creation
+As a Saint Bernard software developer, you have the mission to create a simple prototype that closes the deal. This prototype should render an emergency summary template, parsing and interpolating different placeholders from persisted data. The prototype must be compatible with the Saint Bernard app, a Ruby on Rails web application using SQLite for data storage and Bootstrap 3 for the UI.
 
-* Database initialization
+#### Challenge
 
-* How to run the test suite
+As an emergency staff, and after selecting a patient from a list, I want to view the corresponding emergency summary with the option to print.
 
-* Services (job queues, cache servers, search engines, etc.)
+### Dependencies
 
-* Deployment instructions
+* ruby 2.6.3
+* sqlite3
+* rails ~> 5.2.4
+* sass-rails ~> 5.0
+* Bootstrap 3 - utilized via CDN
 
-* ...
+### Test Suite
+
+* `rspec` - runs the entire test suite.
+* `rspec spec/file_path` - runs the individual spec.
+
+#### Test Suite Dependencies
+
+* faker
+* rspec-rails ~> 3.5
+* factory_bot
+* capybara ~> 3.0
+* selenium-webdriver
+* chromedriver-helper
+
+### Development
+
+To get started locally follow these steps:
+
+1. git clone repo
+2. cd repo
+3. bundle install
+4. `rails db:create db:migrate` - get your database up and running
+5. `rails db:seed` - for seed data
+6. `rails server` - check out the app
+
+### Deployment
+
+Coming Soon
