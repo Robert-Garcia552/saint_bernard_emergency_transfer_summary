@@ -10,7 +10,7 @@ class EmergencyTransferSummaryController < ApplicationController
 
     @summary = {
       "patient" => @patient,
-      "facility" => @facility,
+      "facility" => @facility.name,
       "allergies_sentence" => allergies_sentence,
       "chronic_conditions_sentence" => chronic_conditions_sentence,
       "medications" => medications,
