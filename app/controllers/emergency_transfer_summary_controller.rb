@@ -5,71 +5,47 @@ class EmergencyTransferSummaryController < ApplicationController
   end
 
   def show
-    @facility = Facility.find_by(name: 'Saint Bernard')
-    @patient = Patient.find(params[:id])
+    facility = Facility.find_by(name: 'Saint Bernard')
+    patient = Patient.find(params[:id])
 
     @summary = {
-      "patient" => @patient,
-      "facility" => @facility.name,
-      "allergies_sentence" => allergies_sentence,
-      "chronic_conditions_sentence" => chronic_conditions_sentence,
-      "medications" => medications,
-      "treatment_sentence" => treatment_sentence,
-      "diagnostic_procedures_sentence" => diagnostic_procedures_sentence,
-      "admission_date" => admission_date,
-      "symptoms_sentence" => symptoms_sentence,
-      "diagnoses_sentence" => diagnoses_sentence,
-      "observations_sentence" => observations_sentence,
+      "patient" => patient,
+      "facility" => facility.name,
+      "allergies_sentence" => to_sentence(patient&.allergies) || "no allergies reported",
+      "chronic_conditions_sentence" => to_sentence(patient&.chronic_conditions) || "no chronic conditions reported",
+      "medications" => medications(patient&.medication_orders) || "no medications reported",
+      "treatment_sentence" => treatment_sentence(patient&.treatments) || "no treatment reported",
+      "diagnostic_procedures_sentence" => diagnostic_procedures_sentence(patient&.diagnostic_procedures) || "no diagnostic procedures reported",
+      "admission_date" => date_sentence(patient&.admission&.moment) || "no admission date or time provided",
+      "symptoms_sentence" => to_sentence(patient&.admission&.symptoms) || "no symptoms reported",
+      "diagnoses_sentence" => to_sentence(patient&.admission&.diagnoses) || "no diagnosis reported",
+      "observations_sentence" => to_sentence(patient&.admission&.observations) || "No observations reported",
     }
   end
 
-  def allergies_sentence
-    allergy_descriptions = @patient.allergies.map{ |allergy| allergy.description.tr('.', '') }
-    allergy_descriptions.join(', ')
+  def to_sentence(patient_attribute)
+    attribute_descriptions = patient_attribute&.map{ |attribute| attribute&.description }
+    attribute_descriptions.present? ? attribute_descriptions.join(', ') : false
   end
 
-  def chronic_conditions_sentence
-    chronic_conditions_descriptions = @patient.chronic_conditions.map{ |condition| condition.description.tr('.', '') }
-    chronic_conditions_descriptions.join(', ')
-  end
-
-  def medications
-    medication_orders_data = @patient.medication_orders.map do |order| 
-      "#{order.name} #{order.dosage} #{order.mass_unit} #{order.medication_route} #{order.frequency.times} to #{order.necessity.tr('.', '')}"
+  def medications(patient_medication_orders)
+    medication_orders_data = patient_medication_orders.map do |order| 
+      "#{order&.name} #{order&.dosage} #{order&.mass_unit} #{order&.medication_route} #{order&.frequency&.times} to #{order&.necessity}"
     end
-    medication_orders_data.join(', ')
+    medication_orders_data.present? ? medication_orders_data.join(', ') : false
   end
 
-  def treatment_sentence
-    treatment_data = @patient.treatments.map{ |treatment| "#{treatment.description.tr('.', '')} to #{treatment.necessity.tr('.', '')}"}
-    treatment_data.join(', ')
+  def treatment_sentence(patient_treatments)
+    treatment_data = patient_treatments.map{ |treatment| "#{treatment&.description} to #{treatment&.necessity}"}
+    treatment_data.present? ? treatment_data.join(', ') : false
   end
 
-  def diagnostic_procedures_sentence
-    diagnostic_procedures_data = @patient.diagnostic_procedures.map{ |procedure| "#{procedure.description.tr('.', '')} #{date_sentence(procedure.moment)}" }
-    diagnostic_procedures_data.join(', ')
-  end
-
-  def admission_date
-    date_sentence(@patient.admission.moment)
-  end
-
-  def diagnoses_sentence
-    diagnosis_descriptions = @patient.admission.diagnoses.map{ |diagnosis| diagnosis.description.tr('.', '') }
-    diagnosis_descriptions.join(', ')
-  end
-
-  def symptoms_sentence
-    symptoms_descriptions = @patient.admission.symptoms.map{ |symptom| symptom.description.tr('.', '') }
-    symptoms_descriptions.join(', ')
-  end
-
-  def observations_sentence
-    observations_descriptions = @patient.admission.observations.map{ |observation| observation.description.capitalize.tr('.', '') }
-    observations_descriptions.join(', ')
+  def diagnostic_procedures_sentence(patient_diagnostic_procedures)
+    diagnostic_procedures_data = patient_diagnostic_procedures.map{ |procedure| "#{procedure&.description} #{date_sentence(procedure&.moment) || "no date provided"}" }
+    diagnostic_procedures_data.present? ? diagnostic_procedures_data.join(', ') : false
   end
 
   def date_sentence(datetime)
-    "on #{datetime.strftime('%B %d, %Y')} at #{datetime.strftime('%I:%M %p')}"
+    datetime.present? ? "on #{datetime&.strftime('%B %d, %Y')} at #{datetime&.strftime('%I:%M %p')}" : false
   end
 end
