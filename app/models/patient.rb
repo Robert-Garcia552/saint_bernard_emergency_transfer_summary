@@ -14,6 +14,11 @@ class Patient < ApplicationRecord
   end
 
   def age
-    DateTime.now.strftime('%Y').to_i - self.dob.strftime('%Y').to_i
+    if self.dob.present?
+      age = Date.today.year - self.dob.year
+      age -= 1 if Date.today < self.dob.year + age.years
+    else
+      'DOB not reported'
+    end
   end
 end
