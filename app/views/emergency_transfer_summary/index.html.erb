@@ -1,16 +1,18 @@
-<div class='text-center'>
-  <h1><%= @facility.name %></h1>
-  <p>View Emergency Transfer Form</p>
-  <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Select Patient <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      <% @patients.each do |patient| %>
-        <li>
-          <%= link_to patient.full_name, emergency_transfer_summary_path(patient.id) %>
-        </li>
-      <% end %>
-    </ul>
+<div class='flex-container text-center'>
+  <div>
+    <h1><%= @facility.name %></h1>
+    <p class='header bottom-space'>Select a Patient's Name to View Emergency Transfer Form</p>
+    <div class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Select Patient <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <% @patients.each do |patient| %>
+          <li>
+            <%= link_to patient.full_name, emergency_transfer_summary_path(patient.id) %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 </div>
