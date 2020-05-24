@@ -17,7 +17,7 @@ require 'faker'
 
   Allergy.create(
     patient_id: Patient.last.id,
-    description: Faker::Lorem.sentence(word_count: 10).downcase
+    description: Faker::Lorem.sentence(word_count: 10)
   )
 
   Diagnosis.create(
@@ -25,12 +25,12 @@ require 'faker'
     patient_id: Patient.last.id,
     coding_system: Faker::Lorem.word,
     code: Faker::Number.hexadecimal(digits: 3),
-    description: Faker::Lorem.sentence(word_count: 10).downcase
+    description: Faker::Lorem.sentence(word_count: 10)
   )
 
   DiagnosticProcedure.create(
     patient_id: Patient.last.id,
-    description: Faker::Lorem.sentence(word_count: 10).downcase,
+    description: Faker::Lorem.sentence(word_count: 10),
     moment: Faker::Time.backward(days: 150)
   )
 
@@ -44,7 +44,7 @@ require 'faker'
     mass_unit: 0,
     dosage: Faker::Number.decimal(l_digits: 0, r_digits: 3),
     medication_route: Faker::Number.within(range: 0..2),
-    necessity: Faker::Lorem.sentence(word_count: 10).downcase
+    necessity: Faker::Lorem.sentence(word_count: 10)
   )
 
   OrderFrequency.create(
@@ -55,19 +55,19 @@ require 'faker'
 
   Observation.create(
     admission_id: Admission.last.id,
-    description: Faker::Lorem.sentence(word_count: 10).downcase,
+    description: Faker::Lorem.sentence(word_count: 10),
     moment: Faker::Time.backward(days: 150)
   )
 
   Symptom.create(
     admission_id: Admission.last.id,
-    description: Faker::Lorem.sentence(word_count: 10).downcase
+    description: Faker::Lorem.sentence(word_count: 10)
   )
 
   Treatment.create(
     patient_id: Patient.last.id,
-    description: Faker::Lorem.sentence(word_count: 10).downcase,
-    necessity: Faker::Lorem.sentence(word_count: 10).downcase
+    description: Faker::Lorem.sentence(word_count: 10),
+    necessity: Faker::Lorem.sentence(word_count: 10)
   )
 end
 
