@@ -1,5 +1,5 @@
 <div class='text-center'>
-  <h1>Saint Bernard</h1>
+  <h1><%= @facility.name %></h1>
   <table class="btn-group">
     <tr>
       <th>Patient's Name</th>
@@ -11,7 +11,7 @@
           <%= patient.full_name %>
         </td>
         <td>
-          <%= link_to 'View Emergency Transfer Summary', root_path %>
+          <%= link_to 'View Emergency Transfer Summary', emergency_transfer_summary_path(patient.id) %>
         </td>
       </tr>
     <% end %>

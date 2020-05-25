@@ -1,0 +1,50 @@
+<div class='container'>
+  <div class='gray-background'>
+    <h2 class='header'>Emergency Transfer Summary (Form 34L-D)</h2>
+  </div>
+  <div>
+    <h3 class='header'>Transferring Facility</h3>
+  </div>
+  <div class='small-width'>
+    <p>Name</p>
+    <p><%= @summary["facility"] %></p>
+  </div>
+  <div class='border-top'>
+    <h3 class='header'>Patient Information</h3>
+  </div>
+  <div class='flex'>
+    <div class='border-right'>
+      <p>First Name</p>
+      <p><%= @summary["patient"].first_name %></p>
+    </div>
+    <div class='border-right'>
+      <p>Middle Name</p>
+      <p><%= @summary["patient"].middle_name %></p>
+    </div>
+    <div class='border-right'>
+      <p>Last Name</p>
+      <p><%= @summary["patient"].last_name %></p>
+    </div>
+    <div class='border-right'>
+      <p>Medical Record (MR)</p>
+      <p><%= @summary["patient"].mr %></p>
+    </div>
+  </div>
+  <div>
+    <h3 class='header'>Summary</h3>
+  </div>
+  <div>
+    <p>
+      This <%= @summary["patient"].age %> years old <%= @summary["patient"].gender %> was admitted to <%= @summary["facility"] %> <%= @summary["admission_date"] %> due to <%= @summary["diagnoses_sentence"] %>.
+      The observed symptoms on admission were <%= @summary["symptoms_sentence"] %>. <%= @summary["observations_sentence"].capitalize %>.
+    </p>
+    <p>
+      Upon asking about known allergies, the patient disclosed <%= @summary["allergies_sentence"] %>. Upon asking about chronic conditions, the patient disclosed
+      <%= @summary["chronic_conditions_sentence"] %>. The patient was administered with <%= @summary["medications"] %>.
+    </p>
+    <p>
+      The staff performed <%= @summary["diagnostic_procedures_sentence"] %>, revealing <%= @summary["chronic_conditions_sentence"] %>. Our team proceeded to <%= @summary["treatment_sentence"] %>.
+    </p>
+  </div>
+</div>
+<button class='btn btn-primary' id='btn' onclick='window.print();'>Print Me</button>
