@@ -1,0 +1,19 @@
+<div class='text-center'>
+  <h1>Saint Bernard</h1>
+  <table class="btn-group">
+    <tr>
+      <th>Patient's Name</th>
+      <th>Action(s)</th>
+    </tr>
+    <% @patients.each do |patient| %>
+      <tr>
+        <td>
+          <%= patient.full_name %>
+        </td>
+        <td>
+          <%= link_to 'View Emergency Transfer Summary', root_path %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
