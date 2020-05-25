@@ -1,5 +1,5 @@
 html, body {
-  height: 100%;
+  height: auto;
 }
 
 table {
@@ -85,7 +85,6 @@ table {
   }
 
   .container:last-child {
-    page-break-after: none;
+    page-break-after: auto;
   }
 }
-
