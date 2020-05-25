@@ -28,8 +28,15 @@ table {
   margin: 4em auto;
   padding: 0 !important;
   text-align: left;
+
+  a {
+    font-size: 18px;
+  }
+}
+
+.border {
   border: 1px solid black;
-  
+
   & > * {
     padding: 10px;
     border-bottom: 1px solid black;
