@@ -23,6 +23,7 @@ As an emergency staff, and after selecting a patient from a list, I want to view
 * rails ~> 5.2.4
 * sass-rails ~> 5.0
 * Bootstrap 3 - utilized via CDN
+* faker
 
 ### Development
 
@@ -34,3 +35,17 @@ To get started locally follow these steps:
 4. `rails db:create db:migrate` - get your database up and running
 5. `rails db:seed` - for seed data
 6. `rails server` - check out the app
+
+### Test Suite
+
+* `rspec` - runs the entire test suite.
+* `rspec spec/file_path` - runs the individual spec.
+
+#### Test Suite Dependencies
+
+* faker
+* rspec-rails ~> 3.5
+* factory_bot
+* capybara ~> 3.0
+* selenium-webdriver
+* chromedriver-helper
