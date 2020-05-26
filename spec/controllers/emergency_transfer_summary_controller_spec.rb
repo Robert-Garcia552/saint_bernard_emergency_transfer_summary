@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'pry'
 
 describe EmergencyTransferSummaryController do
-  let!(:facility) { create(:facility) }
+  let!(:facility) { create(:facility, name: 'Saint Bernard') }
 
   it 'GET index' do
     get :index
@@ -24,21 +24,19 @@ describe EmergencyTransferSummaryController do
     summary = {
       'patient' => patient,
       'facility' => facility.name,
-      'allergies_sentence' => patient.allergies.map{ |allergy| allergy.description.tr('.', '') }.join(', '),
-      'chronic_conditions_sentence' => patient.chronic_conditions.map{ |condition| condition.description.tr('.', '') }.join(', '),
-      'medications' => patient.medication_orders.map{ |order| "#{order.name} #{order.dosage} #{order.mass_unit} #{order.medication_route} #{order.frequency.times} to #{order.necessity.tr('.', '')}" }.join(', '),
-      'treatment_sentence' => patient.treatments.map{ |treatment| "#{treatment.description.tr('.', '')} to #{treatment.necessity.tr('.', '')}" }.join(', '),
-      'diagnostic_procedures_sentence' => patient.diagnostic_procedures.map{ |procedure| "#{procedure.description.tr('.', '')} on #{procedure.moment.strftime('%B %d, %Y')} at #{procedure.moment.strftime('%I:%M %p')}" }.join(', '),
+      'allergies_sentence' => patient.allergies.map{ |allergy| allergy.description }.join(', '),
+      'chronic_conditions_sentence' => patient.chronic_conditions.map{ |condition| condition.description }.join(', '),
+      'medications' => patient.medication_orders.map{ |order| "#{order.name} #{order.dosage} #{order.mass_unit} #{order.medication_route} #{order.frequency.times} to #{order.necessity}" }.join(', '),
+      'treatment_sentence' => patient.treatments.map{ |treatment| "#{treatment.description} to #{treatment.necessity}" }.join(', '),
+      'diagnostic_procedures_sentence' => patient.diagnostic_procedures.map{ |procedure| "#{procedure.description} on #{procedure.moment.strftime('%B %d, %Y')} at #{procedure.moment.strftime('%I:%M %p')}" }.join(', '),
       'admission_date' => "on #{admission.moment.strftime('%B %d, %Y')} at #{admission.moment.strftime('%I:%M %p')}",
-      'symptoms_sentence' => patient.admission.symptoms.map{ |symptom| symptom.description.tr('.', '') }.join(', '),
-      'diagnoses_sentence' => patient.admission.diagnoses.map{ |diagnosis| diagnosis.description.tr('.', '') }.join(', '),
-      'observations_sentence' => patient.admission.observations.map{ |observation| observation.description.capitalize.tr('.', '') }.join(', ')
+      'symptoms_sentence' => patient.admission.symptoms.map{ |symptom| symptom.description }.join(', '),
+      'diagnoses_sentence' => patient.admission.diagnoses.map{ |diagnosis| diagnosis.description }.join(', '),
+      'observations_sentence' => patient.admission.observations.map{ |observation| observation.description }.join(', ')
     }
  
     get :show, params: { :id => patient.id }
 
-    expect(@controller.view_assigns['facility'].name).to eq(facility.name)
-    expect(@controller.view_assigns['patient']).to eq(patient)
     expect(@controller.view_assigns['summary']).to eq(summary)
   end
 end

@@ -15,7 +15,6 @@ feature 'User views a patient\'s Emergency Transfer Summary' do
     treatment = create(:treatment, patient_id: patient.id)
 
     visit root_path
-    click_on 'Select Patient'
     find("a[href='#{emergency_transfer_summary_path(patient.id)}']").click
     find('.container')
 
