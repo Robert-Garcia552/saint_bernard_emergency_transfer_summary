@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'User views a patient\'s Emergency Transfer Summary' do
   scenario 'they should select a patient with no missing data and view the Emergency Transfer Summary' do
     patient = create(:patient)
-    facility = create(:facility)
+    facility = create(:facility, name: 'Saint Bernard')
     admission = create(:admission, patient_id: patient.id)
     allergy = create(:allergy, patient_id: patient.id)
     diagnosis = create(:diagnosis, patient_id: patient.id, admission_id: admission.id)
@@ -47,7 +47,7 @@ feature 'User views a patient\'s Emergency Transfer Summary' do
 
   scenario 'they should select a patient with missing data and view the Emergency Transfer Summary' do
     patient = create(:patient)
-    facility = create(:facility)
+    facility = create(:facility, name: 'Saint Bernard')
 
     visit root_path
     find("a[href='#{emergency_transfer_summary_path(patient.id)}']").click

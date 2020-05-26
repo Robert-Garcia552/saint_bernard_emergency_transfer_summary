@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe EmergencyTransferSummaryController do
-  let!(:facility) { create(:facility) }
+  let!(:facility) { create(:facility, name: 'Saint Bernard') }
 
   it 'GET index' do
     get :index
