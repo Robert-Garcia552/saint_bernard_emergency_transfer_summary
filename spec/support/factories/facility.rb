@@ -2,6 +2,6 @@ require 'faker'
 
 FactoryBot.define do
   factory :facility do
-    name { 'Saint Bernard' }
+    name { Faker::Company.name }
   end
 end
