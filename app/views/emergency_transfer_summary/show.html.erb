@@ -9,7 +9,7 @@
     </div>
     <div class='small-width'>
       <p>Name</p>
-      <p><%= @summary["facility"] %></p>
+      <p><%= @facility %></p>
     </div>
     <div class='border-top'>
       <h3 class='header'>Patient Information</h3>
@@ -17,19 +17,19 @@
     <div class='flex'>
       <div class='border-right'>
         <p>First Name</p>
-        <p><%= @summary["patient"].first_name %></p>
+        <p><%= @patient.first_name %></p>
       </div>
       <div class='border-right'>
         <p>Middle Name</p>
-        <p><%= @summary["patient"].middle_name %></p>
+        <p><%= @patient.middle_name %></p>
       </div>
       <div class='border-right'>
         <p>Last Name</p>
-        <p><%= @summary["patient"].last_name %></p>
+        <p><%= @patient.last_name %></p>
       </div>
       <div class='border-right'>
         <p>Medical Record (MR)</p>
-        <p><%= @summary["patient"].mr %></p>
+        <p><%= @patient.mr %></p>
       </div>
     </div>
     <div>
@@ -37,15 +37,15 @@
     </div>
     <div>
       <p>
-        This <%= @summary["patient"].age %> years old <%= @summary["patient"].gender %> was admitted to <%= @summary["facility"] %> <%= @summary["admission_date"] %> due to <%= @summary["diagnoses_sentence"] %>.
-        The observed symptoms on admission were <%= @summary["symptoms_sentence"] %>. <%= @summary["observations_sentence"].capitalize %>.
+        This <%= @patient.age %> years old <%= @patient.gender %> was admitted to <%= @facility %> <%= date_sentence(@patient.admission&.moment) %> due to <%= to_sentence(@patient.admission&.diagnoses, "diagnoses") %>.
+        The observed symptoms on admission were <%= to_sentence(@patient.admission&.symptoms, "symptoms") %>. <%= to_sentence(@patient.admission&.observations, "observations").capitalize %>.
       </p>
       <p>
-        Upon asking about known allergies, the patient disclosed <%= @summary["allergies_sentence"] %>. Upon asking about chronic conditions, the patient disclosed
-        <%= @summary["chronic_conditions_sentence"] %>. The patient was administered with <%= @summary["medications"] %>.
+        Upon asking about known allergies, the patient disclosed <%= to_sentence(@patient.allergies, "allergies") %>. Upon asking about chronic conditions, the patient disclosed
+        <%= to_sentence(@patient.chronic_conditions, "chronic conditions") %>. The patient was administered with <%= medications(@patient.medication_orders) %>.
       </p>
       <p>
-        The staff performed <%= @summary["diagnostic_procedures_sentence"] %>, revealing <%= @summary["chronic_conditions_sentence"] %>. Our team proceeded to <%= @summary["treatment_sentence"] %>.
+        The staff performed <%= to_sentence(@patient.diagnostic_procedures, "diagnostic procedures") %>, revealing <%= to_sentence(@patient.chronic_conditions, "chronic conditions") %>. Our team proceeded to <%= to_sentence(@patient.treatments, "treatments") %>.
       </p>
     </div>
   </div>
